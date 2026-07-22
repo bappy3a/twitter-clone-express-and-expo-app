@@ -6,7 +6,10 @@ import express from "express";
 import { connectDB } from "./config/db.js";
 import { ENV } from "./config/env.js";
 import { arcjetMiddleware } from "./middleware/arcjet.middleware.js";
-import userRoutes from "./routes/user.routes.js";
+import commentRoutes from "./routes/comment.route.js";
+import notificationRoutes from "./routes/notification.route.js";
+import postRoutes from "./routes/post.route.js";
+import userRoutes from "./routes/user.route.js";
 
 const app = express();
 
@@ -19,9 +22,9 @@ app.use(arcjetMiddleware);
 app.get("/", (req, res) => res.send("Hello from server"));
 
 app.use("/api/users", userRoutes);
-// app.use("/api/posts", postRoutes);
-// app.use("/api/comments", commentRoutes);
-// app.use("/api/notifications", notificationRoutes);
+app.use("/api/posts", postRoutes);
+app.use("/api/comments", commentRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 // error handling middleware
 app.use((err, req, res, next) => {
